@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -38,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DiceScreen(modifier: Modifier = Modifier) {
-
+    // Lista de los 6 recursos de dados
     val diceImages = listOf(
         R.drawable.dice_1,
         R.drawable.dice_2,
@@ -48,7 +50,7 @@ fun DiceScreen(modifier: Modifier = Modifier) {
         R.drawable.dice_6
     )
 
-
+    // Estado: guarda cual dado se muestra actualmente
     var currentDice by remember { mutableIntStateOf(diceImages[0]) }
 
     Column(
@@ -61,5 +63,13 @@ fun DiceScreen(modifier: Modifier = Modifier) {
             contentDescription = "Dado",
             modifier = Modifier.size(200.dp)
         )
+
+        Button(onClick = {
+            // Numero aleatorio entre 1 y 6
+            val number = (1..6).random()
+            currentDice = diceImages[number - 1]
+        }) {
+            Text(text = "Lanza el dado!!!")
+        }
     }
 }
